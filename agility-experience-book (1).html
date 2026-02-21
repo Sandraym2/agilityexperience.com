@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agility Experience — Book de Servicios</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0B1F2A;
+    --navy-mid:   #122535;
+    --navy-light: #1A3344;
+    --gold:       #C8A96A;
+    --gold-light: #DEC28A;
+    --gold-dim:   rgba(200,169,106,0.18);
+    --gold-line:  rgba(200,169,106,0.25);
+    --cream:      #F5EDD8;
+    --cream-dim:  rgba(245,237,216,0.7);
+    --cream-mute: rgba(245,237,216,0.38);
+    --white:      #FDFAF3;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ═══ COVER ═══ */
+  .cover {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 520px; height: 520px;
+    background: conic-gradient(from 210deg, var(--gold-dim), transparent 40%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,169,106,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,106,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .cover-topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 36px 56px;
+    border-bottom: 1px solid var(--gold-line);
+  }
+
+  .topbar-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--cream);
+  }
+  .topbar-logo span { color: var(--gold); }
+
+  .topbar-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .cover-body {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 56px;
+    gap: 60px;
+  }
+
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    width: 36px; height: 1px;
+    background: var(--gold);
+  }
+
+  .cover-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 0.95;
+    margin-bottom: 12px;
+  }
+  .cover-headline strong {
+    display: block;
+    color: var(--gold);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .cover-divider {
+    width: 80px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 36px 0;
+  }
+
+  .cover-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--cream-dim);
+    max-width: 420px;
+    font-weight: 300;
+  }
+
+  .cover-pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 48px;
+  }
+
+  .pill {
+    border: 1px solid var(--gold-line);
+    color: var(--cream-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    font-weight: 400;
+  }
+  .pill.active {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .cover-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-self: center;
+  }
+
+  .cover-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2px;
+    background: var(--gold-line);
+    border: 1px solid var(--gold-line);
+  }
+
+  .cover-stat {
+    background: var(--navy-mid);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .cover-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .cover-stat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cream-mute);
+    display: block;
+    margin-top: 6px;
+  }
+
+  .cover-manifesto {
+    border: 1px solid var(--gold-line);
+    padding: 36px 40px;
+    background: var(--navy-mid);
+    position: relative;
+  }
+  .cover-manifesto::before {
+    content: '"';
+    position: absolute;
+    top: 12px; left: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .cover-manifesto p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--cream);
+    font-weight: 300;
+    padding-top: 20px;
+  }
+
+  .cover-bottom {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 56px;
+    border-top: 1px solid var(--gold-line);
+  }
+  .cover-bottom-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cream-mute);
+  }
+  .cover-scroll {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .scroll-arrow {
+    width: 32px; height: 32px;
+    border: 1px solid var(--gold-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+  /* ═══ SHARED ═══ */
+  .section-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 100px 56px;
+  }
+  .dark-band { background: var(--navy); width: 100%; }
+  .mid-band  { background: var(--navy-mid); width: 100%; }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .section-eyebrow.on-light { color: #5A7080; }
+  .section-eyebrow.on-light::before { background: #5A7080; }
+
+  h2.s-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4.5vw, 68px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  h2.s-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+  h2.s-title.light { color: var(--cream); }
+  h2.s-title.light em { color: var(--gold-light); }
+
+  .gold-rule { width: 56px; height: 2px; background: var(--gold); margin-bottom: 48px; }
+
+  /* ═══ ABOUT ═══ */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: #4A5C68;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .about-text p strong { color: var(--navy); font-weight: 600; }
+
+  .about-big-box {
+    background: var(--navy);
+    padding: 52px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-big-box::after {
+    content: 'AE';
+    position: absolute;
+    bottom: -20px; right: -10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 140px;
+    color: rgba(200,169,106,0.07);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .about-big-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.65;
+    color: var(--cream);
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 36px;
+  }
+  .about-big-quote::before {
+    content: '"';
+    display: block;
+    font-size: 56px;
+    color: var(--gold);
+    line-height: 0.7;
+    margin-bottom: 16px;
+    font-style: normal;
+    opacity: 0.6;
+  }
+
+  .about-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2px;
+    background: var(--gold-line);
+  }
+  .a-stat { background: var(--navy-light); padding: 24px 16px; text-align: center; position: relative; z-index: 1; }
+  .a-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--gold); display: block; line-height: 1; }
+  .a-stat-lbl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-mute); margin-top: 4px; display: block; }
+
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .about-tag {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border: 1px solid rgba(11,31,42,0.15);
+    color: #4A5C68;
+    font-weight: 400;
+  }
+
+  /* ═══ SERVICES ═══ */
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+    gap: 32px;
+  }
+  .services-header-note {
+    max-width: 260px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--cream-mute);
+    font-weight: 300;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2px;
+    background: rgba(200,169,106,0.12);
+  }
+
+  .svc-card {
+    background: var(--navy-mid);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.35s;
+  }
+  .svc-card:hover { background: var(--navy-light); }
+  .svc-card::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 2px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+  .svc-card:hover::after { height: 100%; }
+
+  .svc-num { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 4px; color: var(--gold); opacity: 0.5; margin-bottom: 24px; display: block; }
+  .svc-icon { font-size: 40px; display: block; margin-bottom: 20px; line-height: 1; }
+  .svc-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--cream); margin-bottom: 16px; line-height: 1.2; }
+  .svc-card p { font-size: 14px; line-height: 1.75; color: var(--cream-mute); font-weight: 300; }
+  .svc-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+  .svc-link::after { content: '→'; font-size: 14px; transition: transform 0.3s; }
+  .svc-card:hover .svc-link::after { transform: translateX(4px); }
+
+  /* ═══ MENU ═══ */
+  .menu-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 72px;
+  }
+  .menu-intro-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #4A5C68;
+    font-weight: 300;
+    align-self: flex-end;
+  }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 60px 80px; }
+
+  .menu-cat-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(11,31,42,0.1);
+    margin-bottom: 28px;
+  }
+  .menu-cat-icon { width: 44px; height: 44px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .menu-cat-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--navy); line-height: 1; }
+  .menu-cat-sub { font-size: 12px; color: #8A9DAA; font-style: italic; font-family: 'Cormorant Garamond', serif; margin-top: 2px; }
+
+  .menu-row { display: flex; align-items: baseline; gap: 8px; padding: 13px 0; border-bottom: 1px dashed rgba(11,31,42,0.08); }
+  .menu-row:last-child { border-bottom: none; }
+  .menu-row-left { flex: 1; }
+  .menu-item-name { font-size: 14px; color: var(--navy); font-weight: 500; }
+  .menu-item-desc { font-size: 12px; color: #8A9DAA; font-style: italic; font-family: 'Cormorant Garamond', serif; margin-top: 2px; }
+  .menu-dots { flex: 1; border-bottom: 1px dotted rgba(11,31,42,0.12); margin-bottom: 5px; min-width: 20px; }
+  .menu-price { font-size: 13px; color: var(--gold); font-weight: 600; white-space: nowrap; letter-spacing: 0.5px; }
+
+  /* ═══ PACKAGES ═══ */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2px;
+    background: rgba(200,169,106,0.12);
+    margin-top: 64px;
+  }
+
+  .pkg { background: var(--navy-mid); padding: 52px 40px; display: flex; flex-direction: column; position: relative; }
+  .pkg.featured { background: var(--navy); border-top: 2px solid var(--gold); }
+
+  .pkg-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .pkg-tier { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; opacity: 0.7; }
+  .pkg-name { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--cream); line-height: 1; letter-spacing: 2px; margin-bottom: 6px; }
+  .pkg-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: var(--cream-mute); margin-bottom: 40px; font-weight: 300; }
+
+  .pkg-list { list-style: none; flex: 1; margin-bottom: 40px; }
+  .pkg-list li {
+    font-size: 13.5px;
+    color: rgba(245,237,216,0.6);
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(200,169,106,0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .pkg-list li::before { content: '◆'; color: var(--gold); font-size: 8px; flex-shrink: 0; margin-top: 4px; opacity: 0.7; }
+
+  .pkg-btn {
+    display: block;
+    text-align: center;
+    border: 1px solid var(--gold-line);
+    color: var(--gold);
+    padding: 18px;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .pkg-btn:hover, .pkg.featured .pkg-btn { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+  /* ═══ MOOD ═══ */
+  .mood-outer { padding: 80px 56px 100px; max-width: 1320px; margin: 0 auto; }
+
+  .mood-grid {
+    display: grid;
+    grid-template-columns: 5fr 3fr 3fr;
+    grid-template-rows: 260px 260px;
+    gap: 10px;
+    margin-top: 64px;
+  }
+
+  .mood-cell {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 28px;
+  }
+  .mood-cell.tall { grid-row: span 2; }
+
+  .mood-bg-emoji {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 80px;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .mood-cell-label {
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: rgba(245,237,216,0.85);
+    font-weight: 300;
+    z-index: 1;
+  }
+  .mood-cell-label strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-style: normal;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  .m1 { background: linear-gradient(160deg, #0B2535 0%, #0B1F2A 100%); border: 1px solid var(--gold-line); }
+  .m2 { background: linear-gradient(160deg, #122535 0%, #0B1F2A 100%); border: 1px solid rgba(200,169,106,0.1); }
+  .m3 { background: linear-gradient(160deg, #1A3344 0%, #122535 100%); border: 1px solid rgba(200,169,106,0.1); }
+  .m4 { background: linear-gradient(160deg, #0D2030 0%, #091A23 100%); border: 1px solid rgba(200,169,106,0.1); }
+  .m5 { background: linear-gradient(160deg, #122535 0%, #0D2030 100%); border: 1px solid rgba(200,169,106,0.1); }
+
+  /* ═══ TESTIMONIALS ═══ */
+  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: rgba(200,169,106,0.1); margin-top: 64px; }
+  .testi { background: var(--navy-mid); padding: 48px 36px; }
+  .testi-mark { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: var(--gold); line-height: 0.7; display: block; margin-bottom: 20px; opacity: 0.5; }
+  .testi-body { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; line-height: 1.75; color: var(--cream-dim); font-weight: 300; margin-bottom: 32px; }
+  .testi-line { width: 32px; height: 1px; background: var(--gold); margin-bottom: 16px; opacity: 0.5; }
+  .testi-name { font-size: 13px; font-weight: 600; color: var(--cream); letter-spacing: 1px; text-transform: uppercase; }
+  .testi-org { font-size: 12px; color: var(--gold); margin-top: 4px; font-weight: 300; }
+
+  /* ═══ CTA ═══ */
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .cta-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 5vw, 76px); font-weight: 300; line-height: 1.05; color: var(--cream); margin-bottom: 24px; }
+  .cta-left h2 em { color: var(--gold-light); font-style: italic; font-weight: 400; }
+  .cta-left p { font-size: 16px; line-height: 1.8; color: var(--cream-mute); margin-bottom: 44px; font-weight: 300; }
+
+  .cta-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary { display: inline-block; background: var(--gold); color: var(--navy); padding: 18px 40px; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-decoration: none; font-weight: 700; transition: background 0.3s; }
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-outline { display: inline-block; border: 1px solid var(--gold-line); color: var(--cream-dim); padding: 18px 40px; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: all 0.3s; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .contact-panel { background: var(--navy-light); position: relative; }
+  .contact-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold), transparent); }
+
+  .contact-row { display: flex; align-items: flex-start; gap: 20px; padding: 28px 40px; border-bottom: 1px solid rgba(200,169,106,0.08); }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-ico { width: 44px; height: 44px; border: 1px solid var(--gold-line); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; background: rgba(200,169,106,0.06); }
+  .c-lbl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; opacity: 0.8; }
+  .c-val { font-size: 15px; color: var(--cream); font-weight: 400; }
+
+  /* ═══ FOOTER ═══ */
+  footer { background: #060F14; padding: 40px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-top: 1px solid rgba(200,169,106,0.15); }
+  .f-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--cream); }
+  .f-logo span { color: var(--gold); }
+  .f-copy { font-size: 11px; color: rgba(245,237,216,0.2); letter-spacing: 1px; }
+  .f-links { display: flex; gap: 28px; }
+  .f-links a { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,237,216,0.3); text-decoration: none; transition: color 0.3s; }
+  .f-links a:hover { color: var(--gold); }
+
+  /* ═══ REVEAL ═══ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal.vis { opacity: 1; transform: translateY(0); }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 960px) {
+    .cover-body, .cover-topbar, .cover-bottom { padding-left: 32px; padding-right: 32px; }
+    .cover-body { grid-template-columns: 1fr; }
+    .section-wrap { padding: 72px 32px; }
+    .about-grid, .menu-intro, .cta-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid, .packages-grid, .testi-grid { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .mood-outer { padding: 60px 32px 80px; }
+    .mood-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .mood-cell.tall { grid-row: span 1; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    footer { padding: 32px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-topbar">
+    <div class="topbar-logo">Agility <span>Experience</span></div>
+    <div class="topbar-tag">Book de Servicios · 2025</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-left">
+      <div class="cover-eyebrow">Logística & Experiencias para Eventos</div>
+      <div class="cover-headline">
+        Agility<br>
+        <strong>Experience</strong>
+      </div>
+      <div class="cover-divider"></div>
+      <p class="cover-desc">
+        Creamos momentos memorables con barras de snacks gourmet, bebidas artesanales,
+        dulces típicos y catering de autor. Cada evento, una experiencia única.
+      </p>
+      <div class="cover-pills">
+        <div class="pill active">🍿 Snacks</div>
+        <div class="pill">🍹 Bebidas</div>
+        <div class="pill">🍬 Dulces Típicos</div>
+        <div class="pill">🍽️ Catering</div>
+        <div class="pill">🎪 Logística</div>
+      </div>
+    </div>
+
+    <div class="cover-right">
+      <div class="cover-stat-row">
+        <div class="cover-stat">
+          <span class="cover-stat-num">+150</span>
+          <span class="cover-stat-label">Eventos</span>
+        </div>
+        <div class="cover-stat">
+          <span class="cover-stat-num">8</span>
+          <span class="cover-stat-label">Años</span>
+        </div>
+        <div class="cover-stat">
+          <span class="cover-stat-num">100%</span>
+          <span class="cover-stat-label">Calidad</span>
+        </div>
+      </div>
+      <div class="cover-manifesto">
+        <p>Cada evento es una historia única. Nos encargamos de que el sabor, la presentación y la logística estén a la altura de cada momento especial.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-bottom-tag">Ciudad de México · Área Metropolitana</div>
+    <div class="cover-scroll">Explorar <div class="scroll-arrow">↓</div></div>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<div class="section-wrap">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="section-eyebrow on-light">Quiénes Somos</div>
+      <h2 class="s-title">Somos expertos en <em>crear experiencias</em></h2>
+      <div class="gold-rule"></div>
+      <p>En <strong>Agility Experience</strong> fusionamos logística impecable con una propuesta gastronómica que sorprende en cada evento. Desde barras de snacks interactivas hasta catering de gala, cada detalle está pensado para elevar tu celebración.</p>
+      <p>Nos especializamos en eventos corporativos, bodas, lanzamientos de marca y celebraciones privadas. Nuestro equipo coordina montaje, servicio y desmontaje — tú solo disfruta.</p>
+      <p>Trabajamos con productores locales para ofrecer <strong>dulces típicos auténticos</strong>, bebidas de temporada y menús diseñados a la medida del concepto de cada evento.</p>
+      <div class="about-tags">
+        <div class="about-tag">Eventos Corporativos</div>
+        <div class="about-tag">Bodas</div>
+        <div class="about-tag">Lanzamientos</div>
+        <div class="about-tag">Celebraciones Privadas</div>
+        <div class="about-tag">Activaciones de Marca</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="about-big-box">
+        <div class="about-big-quote">
+          "Cada evento es una historia. Nosotros ponemos el sabor, la estética y la experiencia."
+        </div>
+        <div class="about-stats-row">
+          <div class="a-stat"><span class="a-stat-num">+150</span><span class="a-stat-lbl">Eventos</span></div>
+          <div class="a-stat"><span class="a-stat-num">8</span><span class="a-stat-lbl">Años</span></div>
+          <div class="a-stat"><span class="a-stat-num">5★</span><span class="a-stat-lbl">Reseñas</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVICES -->
+<div class="dark-band">
+  <div class="section-wrap">
+    <div class="services-header">
+      <div>
+        <div class="section-eyebrow">Lo que hacemos</div>
+        <h2 class="s-title light">Nuestros <em>Servicios</em></h2>
+      </div>
+      <div class="services-header-note">Cada servicio es completamente personalizable según el concepto y escala de tu evento.</div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal"><span class="svc-num">01</span><span class="svc-icon">🍿</span><h3>Barra de Snacks</h3><p>Estaciones interactivas con botanas gourmet, frutos secos, palomitas artesanales, galletas y más. Montaje visual impactante y servicio personalizado.</p><div class="svc-link">Ver más</div></div>
+      <div class="svc-card reveal"><span class="svc-num">02</span><span class="svc-icon">🍹</span><h3>Barra de Bebidas</h3><p>Aguas frescas, jugos naturales, sodas artesanales, mocktails y cocteles temáticos. Con y sin alcohol, adaptados al concepto de tu evento.</p><div class="svc-link">Ver más</div></div>
+      <div class="svc-card reveal"><span class="svc-num">03</span><span class="svc-icon">🍬</span><h3>Dulces Típicos</h3><p>Selección curada de dulces tradicionales: mazapán, tamarindo, obleas, cocadas, borrachitos y pulpa real. Perfectos como recuerdo o decoración.</p><div class="svc-link">Ver más</div></div>
+      <div class="svc-card reveal"><span class="svc-num">04</span><span class="svc-icon">🍽️</span><h3>Catering Completo</h3><p>Menús de autor para desayunos, coffee breaks, cenas de gala y buffets. Cocina en sitio con chefs especializados y servicio de mozos.</p><div class="svc-link">Ver más</div></div>
+      <div class="svc-card reveal"><span class="svc-num">05</span><span class="svc-icon">🎪</span><h3>Logística Integral</h3><p>Coordinación completa: montaje, ambientación, manejo de personal, control de tiempos y desmontaje. Todo en un solo proveedor.</p><div class="svc-link">Ver más</div></div>
+      <div class="svc-card reveal"><span class="svc-num">06</span><span class="svc-icon">✨</span><h3>Experiencias Temáticas</h3><p>Conceptos únicos adaptados a tu marca: estaciones con decoración personalizada, packaging especial y activaciones de producto.</p><div class="svc-link">Ver más</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MENU -->
+<div class="section-wrap">
+  <div class="menu-intro">
+    <div>
+      <div class="section-eyebrow on-light">Catálogo</div>
+      <h2 class="s-title">Nuestra oferta <em>gastronómica</em></h2>
+      <div class="gold-rule"></div>
+    </div>
+    <p class="menu-intro-note">Una muestra de nuestra selección. Todos los menús son personalizables según el evento, la temporada y el presupuesto. Contáctanos para una propuesta a tu medida.</p>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-cat reveal">
+      <div class="menu-cat-header"><div class="menu-cat-icon">🍿</div><div><div class="menu-cat-name">Snacks & Botanas</div><div class="menu-cat-sub">Coffee breaks y cócteles</div></div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Palomitas Gourmet</div><div class="menu-item-desc">Mantequilla, cheddar, caramelo salado</div></div><div class="menu-dots"></div><div class="menu-price">Desde $45/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Frutos Secos Premium</div><div class="menu-item-desc">Mix de nueces, almendras y arándanos</div></div><div class="menu-dots"></div><div class="menu-price">Desde $65/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Tabla de Quesos & Embutidos</div><div class="menu-item-desc">Selección artesanal con acompañamientos</div></div><div class="menu-dots"></div><div class="menu-price">Desde $120/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Crudités con Dips</div><div class="menu-item-desc">Hummus, guacamole y tzatziki</div></div><div class="menu-dots"></div><div class="menu-price">Desde $55/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Bruschetta & Crostini</div><div class="menu-item-desc">Variedad de toppings de temporada</div></div><div class="menu-dots"></div><div class="menu-price">Desde $80/pax</div></div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <div class="menu-cat-header"><div class="menu-cat-icon">🥤</div><div><div class="menu-cat-name">Bebidas</div><div class="menu-cat-sub">Con y sin alcohol</div></div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Aguas Frescas Artesanales</div><div class="menu-item-desc">Jamaica, horchata, tamarindo, pepino-limón</div></div><div class="menu-dots"></div><div class="menu-price">Desde $35/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Jugos Naturales</div><div class="menu-item-desc">Verde, rojo, zanahoria-naranja, betabel</div></div><div class="menu-dots"></div><div class="menu-price">Desde $50/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Mocktails Signature</div><div class="menu-item-desc">Recetas propias con frutas de temporada</div></div><div class="menu-dots"></div><div class="menu-price">Desde $75/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Barra de Café Specialty</div><div class="menu-item-desc">Espresso, cappuccino, cold brew, matchas</div></div><div class="menu-dots"></div><div class="menu-price">Desde $90/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Open Bar Premium</div><div class="menu-item-desc">Cocteles clásicos y de autor, 4 hrs</div></div><div class="menu-dots"></div><div class="menu-price">Desde $250/pax</div></div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <div class="menu-cat-header"><div class="menu-cat-icon">🍬</div><div><div class="menu-cat-name">Dulces Típicos</div><div class="menu-cat-sub">Sabores auténticos de México</div></div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Mazapán de la Rosa</div><div class="menu-item-desc">Clásico y de cacahuate</div></div><div class="menu-dots"></div><div class="menu-price">Desde $15/pz</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Cocadas Artesanales</div><div class="menu-item-desc">Natural, cajeta y chocolate</div></div><div class="menu-dots"></div><div class="menu-price">Desde $25/pz</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Glorias & Borrachitos</div><div class="menu-item-desc">Dulce de leche con nuez</div></div><div class="menu-dots"></div><div class="menu-price">Desde $18/pz</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Pulpa Real de Tamarindo</div><div class="menu-item-desc">Con chile y sin chile</div></div><div class="menu-dots"></div><div class="menu-price">Desde $20/pz</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Caja Surtida Premium</div><div class="menu-item-desc">Selección personalizada para regalo</div></div><div class="menu-dots"></div><div class="menu-price">Desde $180/cja</div></div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <div class="menu-cat-header"><div class="menu-cat-icon">🍽️</div><div><div class="menu-cat-name">Catering</div><div class="menu-cat-sub">Para todas las ocasiones</div></div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Desayuno Ejecutivo</div><div class="menu-item-desc">Buffet completo, pan, fruta, hot items</div></div><div class="menu-dots"></div><div class="menu-price">Desde $180/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Coffee Break Premium</div><div class="menu-item-desc">Bebidas calientes, snacks y repostería</div></div><div class="menu-dots"></div><div class="menu-price">Desde $120/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Lunch Buffet Corporativo</div><div class="menu-item-desc">3 tiempos, proteínas, guarniciones y postres</div></div><div class="menu-dots"></div><div class="menu-price">Desde $320/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Cena de Gala</div><div class="menu-item-desc">Servicio de mantel, maridaje y chef en sitio</div></div><div class="menu-dots"></div><div class="menu-price">Desde $650/pax</div></div>
+      <div class="menu-row"><div class="menu-row-left"><div class="menu-item-name">Menú Temático</div><div class="menu-item-desc">Personalizado según concepto del evento</div></div><div class="menu-dots"></div><div class="menu-price">Cotización especial</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PACKAGES -->
+<div class="dark-band">
+  <div class="section-wrap">
+    <div class="section-eyebrow">Paquetes</div>
+    <h2 class="s-title light">Elige tu <em>Experiencia</em></h2>
+    <div class="gold-rule"></div>
+    <div class="packages-grid">
+      <div class="pkg reveal">
+        <div class="pkg-tier">Paquete 01</div>
+        <div class="pkg-name">Essential</div>
+        <div class="pkg-tagline">La base perfecta para comenzar</div>
+        <ul class="pkg-list">
+          <li>Barra de snacks básica (3 opciones)</li>
+          <li>Barra de bebidas no alcohólicas</li>
+          <li>Mesa de dulces típicos surtidos</li>
+          <li>Montaje y desmontaje incluido</li>
+          <li>Personal de servicio (1 por estación)</li>
+          <li>Duración hasta 4 horas</li>
+          <li>Mínimo 50 personas</li>
+        </ul>
+        <a href="#contacto" class="pkg-btn">Solicitar Cotización</a>
+      </div>
+      <div class="pkg featured reveal">
+        <div class="pkg-badge">⭐ Más Popular</div>
+        <div class="pkg-tier">Paquete 02</div>
+        <div class="pkg-name">Premium</div>
+        <div class="pkg-tagline">Experiencia completa y memorable</div>
+        <ul class="pkg-list">
+          <li>Barra de snacks gourmet (6 opciones)</li>
+          <li>Barra de bebidas completa + café specialty</li>
+          <li>Mesa premium de dulces con decoración</li>
+          <li>Catering: desayuno o lunch buffet incluido</li>
+          <li>Personal de servicio especializado</li>
+          <li>Decoración y ambientación de estaciones</li>
+          <li>Duración hasta 6 horas · Mínimo 80 personas</li>
+        </ul>
+        <a href="#contacto" class="pkg-btn">Solicitar Cotización</a>
+      </div>
+      <div class="pkg reveal">
+        <div class="pkg-tier">Paquete 03</div>
+        <div class="pkg-name">Luxury</div>
+        <div class="pkg-tagline">La experiencia más exclusiva</div>
+        <ul class="pkg-list">
+          <li>Estaciones de snacks ilimitadas y personalizadas</li>
+          <li>Open bar premium 6 horas (con y sin alcohol)</li>
+          <li>Caja de dulces típicos personalizada de recuerdo</li>
+          <li>Cena de gala con servicio de mantel</li>
+          <li>Chef en sitio + sommelier</li>
+          <li>Diseño de concepto gastronómico a medida</li>
+          <li>Coordinador de logística exclusivo</li>
+        </ul>
+        <a href="#contacto" class="pkg-btn">Solicitar Cotización</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MOOD GALLERY -->
+<div class="mood-outer">
+  <div class="section-eyebrow on-light">Nuestra estética</div>
+  <h2 class="s-title">Ambientes que <em>inspiran</em></h2>
+  <div class="gold-rule"></div>
+  <div class="mood-grid">
+    <div class="mood-cell tall m1">
+      <div class="mood-bg-emoji">🍽️</div>
+      <div class="mood-cell-label"><strong>Montaje de Autor</strong>Cada estación diseñada con propósito y estética</div>
+    </div>
+    <div class="mood-cell m2">
+      <div class="mood-bg-emoji">🍹</div>
+      <div class="mood-cell-label"><strong>Barras de Bebidas</strong>Artesanales y de temporada</div>
+    </div>
+    <div class="mood-cell m3">
+      <div class="mood-bg-emoji">🍬</div>
+      <div class="mood-cell-label"><strong>Dulces Típicos</strong>Auténticos sabores de México</div>
+    </div>
+    <div class="mood-cell m4">
+      <div class="mood-bg-emoji">🎉</div>
+      <div class="mood-cell-label"><strong>Eventos Corporativos</strong>Profesionalismo en cada detalle</div>
+    </div>
+    <div class="mood-cell m5">
+      <div class="mood-bg-emoji">☕</div>
+      <div class="mood-cell-label"><strong>Coffee Breaks Premium</strong>Momentos de pausa con clase</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TESTIMONIALS -->
+<div class="dark-band">
+  <div class="section-wrap">
+    <div class="section-eyebrow">Testimonios</div>
+    <h2 class="s-title light">Clientes que nos <em>confían</em></h2>
+    <div class="gold-rule"></div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <span class="testi-mark">"</span>
+        <p class="testi-body">La barra de dulces típicos fue el hit de la noche. Todos los invitados se llevaron recuerdos y la logística fue impecable de principio a fin.</p>
+        <div class="testi-line"></div>
+        <div class="testi-name">Mariana González</div>
+        <div class="testi-org">Directora de Marketing · Grupo Empresarial MX</div>
+      </div>
+      <div class="testi reveal">
+        <span class="testi-mark">"</span>
+        <p class="testi-body">Contratamos el paquete Premium para nuestro lanzamiento de marca. Las estaciones de snacks gourmet fueron fotografiadas por todos. Superó expectativas.</p>
+        <div class="testi-line"></div>
+        <div class="testi-name">Carlos Reyes</div>
+        <div class="testi-org">CEO · Startup TechMX</div>
+      </div>
+      <div class="testi reveal">
+        <span class="testi-mark">"</span>
+        <p class="testi-body">Llevamos 3 eventos con Agility Experience. Su capacidad para personalizar cada detalle y resolver en tiempo real es lo que los hace completamente diferentes.</p>
+        <div class="testi-line"></div>
+        <div class="testi-name">Sofía Herrera</div>
+        <div class="testi-org">Coordinadora · Hotel Boutique Centro</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CTA / CONTACTO -->
+<div class="dark-band" id="contacto">
+  <div class="section-wrap">
+    <div class="cta-grid">
+      <div class="cta-left reveal">
+        <div class="section-eyebrow">Hablemos</div>
+        <h2>¿Listo para algo <em>extraordinario</em>?</h2>
+        <p>Cuéntanos de tu evento y en menos de 24 horas te enviamos una propuesta personalizada sin costo. Cada experiencia es única.</p>
+        <div class="cta-btns">
+          <a href="mailto:hola@agilityexperience.mx" class="btn-primary">Cotizar ahora</a>
+          <a href="https://wa.me/5215512345678" class="btn-outline">WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-panel reveal">
+        <div class="contact-row"><div class="contact-ico">📍</div><div><div class="c-lbl">Ubicación</div><div class="c-val">Ciudad de México & Área Metropolitana</div></div></div>
+        <div class="contact-row"><div class="contact-ico">📱</div><div><div class="c-lbl">WhatsApp & Teléfono</div><div class="c-val">+52 (55) 1234-5678</div></div></div>
+        <div class="contact-row"><div class="contact-ico">✉️</div><div><div class="c-lbl">Correo electrónico</div><div class="c-val">hola@agilityexperience.mx</div></div></div>
+        <div class="contact-row"><div class="contact-ico">📸</div><div><div class="c-lbl">Instagram</div><div class="c-val">@agilityexperience</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Agility <span>Experience</span></div>
+  <div class="f-copy">© 2025 Agility Experience · Todos los derechos reservados</div>
+  <div class="f-links">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">WhatsApp</a>
+  </div>
+</footer>
+
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('vis');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  items.forEach((el) => {
+    const parent = el.parentElement;
+    const siblings = [...parent.children].filter(c => c.classList.contains('reveal'));
+    const idx = siblings.indexOf(el);
+    if (idx > 0) el.style.transitionDelay = `${idx * 0.1}s`;
+    io.observe(el);
+  });
+
+  // Cover entrance
+  const body = document.querySelector('.cover-body');
+  body.style.cssText += 'opacity:0;transform:translateY(20px);transition:opacity 1s ease,transform 1s ease;';
+  setTimeout(() => { body.style.opacity = 1; body.style.transform = 'translateY(0)'; }, 150);
+</script>
+</body>
+</html>
